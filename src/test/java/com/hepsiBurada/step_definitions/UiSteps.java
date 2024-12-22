@@ -1,5 +1,7 @@
 package com.hepsiBurada.step_definitions;
 
+
+import com.hepsiBurada.pages.Cart;
 import com.hepsiBurada.pages.Iphone;
 import com.hepsiBurada.utilities.BrowserUtils;
 import com.hepsiBurada.utilities.Driver;
@@ -10,12 +12,13 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
+
 
 public class UiSteps {
 
     Iphone iphone = new Iphone();
+    Cart cart = new Cart();
     public WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(30));
 
 
@@ -106,4 +109,34 @@ public class UiSteps {
         Assert.assertEquals("ürün sepetinizde listelenmedi", "Ürün sepetinizde", iphone.ürünSepetinizde.getText());
     }
 
+    Double productPrice = 0.0;
+
+    @And("Store the price from the selected product")
+    public void storeThePriceFromTheSelectedProduct() {
+        productPrice = iphone.getListedPrice(0);
+
+        BrowserUtils.scrollToElement(iphone.sepeteEkle);
+        BrowserUtils.waitForVisibility(iphone.sepeteEkle, Duration.ofSeconds(2));
+        iphone.sepeteEkle.click();
+
+    }
+
+    @And("Add product to cart")
+    public void addProductToCart() {
+        System.out.println("add product to cart stepDef");
+        BrowserUtils.waitForVisibility(cart.sepeteGit, Duration.ofSeconds(5));
+        cart.sepeteGit.click();
+    }
+
+
+    @Then("Verify price from product page matches price from cart")
+    public void verifyPriceFromProductPageMatchesPriceFromCart() {
+        BrowserUtils.waitForVisibility(cart.cartPrice, Duration.ofSeconds(5));
+        double cartPrice = cart.getCartPrice();
+        System.out.println("cartPrice = " + cartPrice);
+        System.out.println("productPrice = " + productPrice);
+
+        Assert.assertEquals(productPrice, cartPrice, 0.0);
+
+    }
 }
