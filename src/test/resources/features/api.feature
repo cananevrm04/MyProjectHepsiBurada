@@ -11,3 +11,11 @@ Feature: Test API
       | 100 | doggie | available | 200        |
       | 101 | Harley | available | 200        |
 
+  @api @api2
+  Scenario Outline:
+    When Post the pet <id>, and name as "<name>" and status as "<status>"
+    Then Verify response status code as <statusCode>
+    Examples:
+      | id  | name     | status    | statusCode |
+      | 131 | Michelle | sold      | 200        |
+      | 132 | Harley   | available | 200        |

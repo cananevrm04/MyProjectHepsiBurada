@@ -37,4 +37,19 @@ public class ApiSteps {
         Assert.assertEquals("name does not match",expectedName, actualName );
         Assert.assertEquals("status does not match",expectedStatus, actualStatus );
     }
+    @When("Post the pet {int}, and name as {string} and status as {string}")
+    public void postThePetIdAndNameAsAndStatusAs(int id, String name, String status) {
+        JSONObject json = new JSONObject();
+        json.put("petId", id);
+        json.put("name", name);
+        json.put("status", status);
+
+        response = given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body(json.toString())
+                .post("pet");
+
+        response.prettyPrint();
+    }
 }
