@@ -7,3 +7,10 @@ Feature: Rate certain products
     When Search for iphones and select a random product
     And Hit değerlendirmeler and Rank according to En Yeni Değerlendirme give thumbsUp
     Then Verify success message as "Teşekkür Ederiz."
+
+  @UI @S2
+  Scenario: Add cheapest product to cart
+    When Search for iphones and select a random product
+    Then Verify Diğer Satıcılar exists on the page
+    When Compare prices and select the cheapest one
+    Then verify product is added to cart
