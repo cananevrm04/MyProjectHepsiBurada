@@ -1,6 +1,5 @@
 package com.hepsiBurada.step_definitions;
 
-
 import com.hepsiBurada.pages.Cart;
 import com.hepsiBurada.pages.Iphone;
 import com.hepsiBurada.utilities.BrowserUtils;
@@ -13,7 +12,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
-
 
 public class UiSteps {
 

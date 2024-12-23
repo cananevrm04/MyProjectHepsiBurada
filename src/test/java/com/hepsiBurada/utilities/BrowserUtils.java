@@ -33,15 +33,6 @@ public class BrowserUtils {
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static WebElement waitForVisibility(By locator, Duration timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), timeout);
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
-    public static void clickWithJS(WebElement element) {
-        ((JavascriptExecutor) Driver.get()).executeScript("arguments[0].scrollIntoView(true);", element);
-        ((JavascriptExecutor) Driver.get()).executeScript("arguments[0].click();", element);
-    }
-
     public static void scrollToElement(WebElement element) {
         ((JavascriptExecutor) Driver.get()).executeScript("arguments[0].scrollIntoView(true);", element);
     }
